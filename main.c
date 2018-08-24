@@ -4,7 +4,7 @@
 int main()
 {
  int numero, numMax=0, numMin=100, i=0, suma=0;
-float promedio ;
+float promedio   ;
     for (;i<10;i++)
     {
         printf("Ingrese el numero: ");
