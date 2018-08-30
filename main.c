@@ -1,30 +1,46 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
+
+int getEntero(int* pNumero, int reintentos,int Min,int Max, char* msg, char* msgErr);
 
 int main()
 {
- int numero, numMax=0, numMin=100, i=0, suma=0;
-float promedio   ;
-    for (;i<10;i++)
+    int Numero;
+    if (getEntero(&Numero,4, 10, 250,"Ingrese Numero: ", "NUMERO INVALIDO\n") == 0)
     {
-        printf("Ingrese el numero: ");
-        scanf("%d",&numero);
-        suma=suma+numero;
-
-        if (numero>numMax)
-        {numMax = numero;}
-
-        if(numero<numMin)
-        {numMin= numero;}
-
+        printf("El Numero es: %d",Numero);
     }
-    printf("la suma de todos los numeros es: %d\n",suma);
-    promedio=(float)suma/10;
-    printf("el promedio es: %.2f\n",promedio);
-
-    printf("el numero maximo es: %d\n",numMax);
-    printf("el numero minimo es: %d\n",numMin);
-
 
     return 0;
+}
+
+
+int getEntero(int* pNumero, int reintentos,int Min,int Max, char* msg, char* msgErr)
+{
+    int retorno = -1;
+    int auxiliar;
+
+    for(;reintentos > 0;reintentos--)
+    {
+        printf(msg);
+        if(scanf("%d",&auxiliar) == 1)
+        {
+            if(auxiliar >= Min && auxiliar < Max)
+            {
+                *pNumero = auxiliar;
+                retorno = 0;
+                break;
+            }
+            else
+            {
+                printf("El numero esta fuera de rango [10-250]\n");
+            }
+        }
+        else
+        {
+            printf(msgErr);
+            __fpurge(stdin);
+        }
+    }
+    return retorno;
 }
